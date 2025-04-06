@@ -93,3 +93,20 @@ SaveManager:BuildConfigSection(Tabs["UI Settings"])
 ThemeManager:ApplyToTab(Tabs["UI Settings"])
 SaveManager:LoadAutoloadConfig()
 ```
+
+
+Toggle:
+```lua
+LeftGroupBox:AddToggle("MyToggle", {
+	Text = "This is a toggle",
+	Tooltip = "This is a tooltip",
+	DisabledTooltip = "I am disabled!",
+	Default = true,
+	Disabled = false,
+	Visible = true,
+	Risky = false,
+	Callback = function(Value)
+		print("[cb] MyToggle changed to:", Value)
+	end,
+})
+```
