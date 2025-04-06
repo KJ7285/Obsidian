@@ -37,7 +37,7 @@ local Tabs = {
 ```
 
 theme/saver thing:
-```lha
+```lua
 local MenuGroup = Tabs["UI Settings"]:AddLeftGroupbox("Menu")
 
 MenuGroup:AddToggle("KeybindMenuOpen", {
