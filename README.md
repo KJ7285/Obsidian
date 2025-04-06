@@ -1,7 +1,7 @@
 # Obsidian
 
 Hello guys this is UI library of obsidian credits to lion
-
+All the elements are down here
 
 Library:
 ```lua
@@ -14,6 +14,17 @@ local Toggles = Library.Toggles
 
 Library.ForceCheckbox = false
 Library.ShowToggleFrameInKeybinds = tru
-e```
+e
+```
 
 
+Window
+```lua
+local Window = Library:CreateWindow({
+	Title = "Example window",
+	Footer = "version: example",
+	Icon = 95816097006870,
+	NotifySide = "Right",
+	ShowCustomCursor = true,
+})
+```
