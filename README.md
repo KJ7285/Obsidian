@@ -13,8 +13,7 @@ local Options = Library.Options
 local Toggles = Library.Toggles
 
 Library.ForceCheckbox = false
-Library.ShowToggleFrameInKeybinds = tru
-e
+Library.ShowToggleFrameInKeybinds = true
 ```
 
 
