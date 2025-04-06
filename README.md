@@ -27,3 +27,11 @@ local Window = Library:CreateWindow({
 	ShowCustomCursor = true,
 })
 ```
+
+Tab:
+```lua
+local Tabs = {
+	Main = Window:AddTab("Main", "user"),
+	["UI Settings"] = Window:AddTab("UI Settings", "settings"),
+}
+```
