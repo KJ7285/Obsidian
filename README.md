@@ -1,112 +1,64 @@
-# Obsidian
+# Obsidian UI Library
 
-Hello guys this is UI library of obsidian credits to lion
-All the elements are down here
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| Text | string | "Button" | The button's text |
+| Func | function | function() end | The function to call when clicked |
+| DoubleClick | boolean | false | Whether the button needs double-click |
+| Tooltip | string | nil | Tooltip text shown on hover |
+| DisabledTooltip | string | nil | Tooltip shown when disabled |
+| Risky | boolean | false | Displays text in red to indicate risky action |
+| Disabled | boolean | false | Whether the button is disabled |
+| Visible | boolean | true | Whether the button is visible |
 
-Library:
+
+#### Methods
+
+
+| Method | Description |
+| --- | --- |
+| `Button:SetText(text)` | Updates the button's text |
+| `Button:SetDisabled(boolean)` | Enables or disables the button |
+| `Button:SetVisible(boolean)` | Shows or hides the button |
+
+
+### Toggles & Checkboxes
+
+
+Toggles and checkboxes allow users to toggle boolean values.
+
+
 ```lua
-local repo = "https://raw.githubusercontent.com/deividcomsono/Obsidian/main/"
-local Library = loadstring(game:HttpGet(repo .. "Library.lua"))()
-local ThemeManager = loadstring(game:HttpGet(repo .. "addons/ThemeManager.lua"))()
-local SaveManager = loadstring(game:HttpGet(repo .. "addons/SaveManager.lua"))()
-local Options = Library.Options
-local Toggles = Library.Toggles
+-- Always capture the reference returned by AddToggle
+local MyToggle = Groupbox:AddToggle("MyToggle", {
+    Text = "Example Toggle",
+    Default = false,
+    Tooltip = "This is a toggle",
+    Callback = function(Value)
+        print("Toggle changed to:", Value)
+    end
+})
 
-Library.ForceCheckbox = false
-Library.ShowToggleFrameInKeybinds = true
+
+-- You can use :OnChanged to add another callback
+MyToggle:OnChanged(function(Value)
+    print("Toggle changed via OnChanged:", Value)
+})
+
+
+-- You can also create checkboxes instead of switch-style toggles
+local MyCheckbox = Groupbox:AddCheckbox("MyCheckbox", {
+    Text = "Example Checkbox",
+    Default = false,
+    Callback = function(Value)
+        print("Checkbox changed to:", Value)
+    end
+})
 ```
 
 
-Window
-```lua
-local Window = Library:CreateWindow({
-	Title = "Example window",
-	Footer = "version: example",
-	Icon = 95816097006870,
-	NotifySide = "Right",
-	ShowCustomCursor = true,
-})
-```
-
-Tab:
-```lua
-local Tabs = {
-	Main = Window:AddTab("Main", "user"),
-	["UI Settings"] = Window:AddTab("UI Settings", "settings"),
-}
-```
-
-theme/saver thing:
-```lua
-local MenuGroup = Tabs["UI Settings"]:AddLeftGroupbox("Menu")
-
-MenuGroup:AddToggle("KeybindMenuOpen", {
-	Default = Library.KeybindFrame.Visible,
-	Text = "Open Keybind Menu",
-	Callback = function(value)
-		Library.KeybindFrame.Visible = value
-	end,
-})
-MenuGroup:AddToggle("ShowCustomCursor", {
-	Text = "Custom Cursor",
-	Default = true,
-	Callback = function(Value)
-		Library.ShowCustomCursor = Value
-	end,
-})
-MenuGroup:AddDropdown("NotificationSide", {
-	Values = { "Left", "Right" },
-	Default = "Right",
-	Text = "Notification Side",
-	Callback = function(Value)
-		Library:SetNotifySide(Value)
-	end,
-})
-MenuGroup:AddDropdown("DPIDropdown", {
-	Values = { "50%", "75%", "100%", "125%", "150%", "175%", "200%" },
-	Default = "100%",
-	Text = "DPI Scale",
-	Callback = function(Value)
-		Value = Value:gsub("%%", "")
-		local DPI = tonumber(Value)
-		Library:SetDPIScale(DPI)
-	end,
-})
-MenuGroup:AddDivider()
-MenuGroup:AddLabel("Menu bind")
-	:AddKeyPicker("MenuKeybind", { Default = "RightShift", NoUI = true, Text = "Menu keybind" })
-
-MenuGroup:AddButton("Unload", function()
-	Library:Unload()
-end)
-
-Library.ToggleKeybind = Options.MenuKeybind
-
-ThemeManager:SetLibrary(Library)
-SaveManager:SetLibrary(Library)
-SaveManager:IgnoreThemeSettings()
-SaveManager:SetIgnoreIndexes({ "MenuKeybind" })
-ThemeManager:SetFolder("MyScriptHub")
-SaveManager:SetFolder("MyScriptHub/specific-game")
-SaveManager:SetSubFolder("specific-place")
-SaveManager:BuildConfigSection(Tabs["UI Settings"])
-ThemeManager:ApplyToTab(Tabs["UI Settings"])
-SaveManager:LoadAutoloadConfig()
-```
+#### Options
 
 
-Toggle:
-```lua
-LeftGroupBox:AddToggle("MyToggle", {
-	Text = "This is a toggle",
-	Tooltip = "This is a tooltip",
-	DisabledTooltip = "I am disabled!",
-	Default = true,
-	Disabled = false,
-	Visible = true,
-	Risky = false,
-	Callback = function(Value)
-		print("[cb] MyToggle changed to:", Value)
-	end,
-})
-```
+| Property | Type | Default | Description |
+
